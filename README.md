@@ -1,6 +1,6 @@
-# Sharon Zou and Christina Tan's Final Project
-
-* Our original proposal was accidentally deleted after changing our files *
+# Sharon Zou and Christina Tan's Final Project 
+Period 4
+<i> Our original proposal was accidentally deleted after changing our files
 
 Features:
 
