@@ -2,6 +2,23 @@ from display import *
 from matrix import *
 from gmath import *
 
+
+def add_mesh(polygons, file):
+    v = []
+    n = []
+    file = open(file, 'r')
+    for line in file.readlines():
+        p = line.split()
+        if len(line) > 1:
+            if p[0] == "v":
+
+                v.append([x, y, z])
+            if p[0] == "vn":
+
+            if p[0] == "f":
+                
+    file.close()
+
 def draw_scanline(x0, z0, x1, z1, y, screen, zbuffer, color):
     if x0 > x1:
         tx = x0

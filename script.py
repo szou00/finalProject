@@ -156,7 +156,18 @@ def run(filename):
             args = command['args']
             knob_value = 1
 
-            if c == 'box':
+# ********************************
+            if c == 'mesh':
+                if command['constants']:
+                    reflect = command['constants']
+                add_mesh(tmp, args[0]) # add_mesh in draw.py *
+                matrix_mult( stack[-1], tmp )
+                draw_polygons(tmp, screen, zbuffer, view, ambient, light, symbols, reflect)
+                tmp = []
+                reflect = '.white'
+# ********************************
+
+            elif c == 'box':
                 if command['constants']:
                     reflect = command['constants']
                 add_box(tmp,
