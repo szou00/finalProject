@@ -11,12 +11,22 @@ def add_mesh(polygons, file):
         p = line.split()
         if len(line) > 1:
             if p[0] == "v":
-
+                x = float(p[1])
+                y = float(p[2])
+                z = float(p[3])
                 v.append([x, y, z])
-            if p[0] == "vn":
-
             if p[0] == "f":
-                
+                line = line[1:]
+                count = 2
+                while count < len(line):
+                    p0 = int(line[0]) - 1
+                    p1 = int(line[count - 1]) - 1
+                    p2 = int(line[count]) - 1
+                    add_polygon(edges,
+                                points[p0][0], points[p0][1], points[p0][2]
+                                points[p1][0], points[p1][1], points[p1][2]
+                                points[p2][0], points[p2][1], points[p2][2])
+                    count +=1
     file.close()
 
 def draw_scanline(x0, z0, x1, z1, y, screen, zbuffer, color):
