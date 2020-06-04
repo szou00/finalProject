@@ -1,7 +1,30 @@
 push
 move
 250 250 0
-box
-0 0 0 200 100 400
+rotate
+y 90
 cylinder
-0 0 0 20 40
+0 0 0 100 200
+display
+clear
+rotate
+x 90
+cylinder
+0 0 0 100 200
+display
+clear
+rotate
+x 45
+cylinder
+0 0 0 100 200
+display
+clear
+rotate
+z 45
+rotate
+x 45
+rotate
+y 45
+cylinder
+0 0 0 100 200
+display

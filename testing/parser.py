@@ -59,7 +59,7 @@ The file follows the following format:
 
 See the file script for an example of the file format
 """
-ARG_COMMANDS = [ 'box', 'sphere', 'torus', 'circle', 'bezier', 'hermite', 'line', 'scale', 'move', 'rotate', 'save' ]
+ARG_COMMANDS = [ 'box', 'sphere', 'torus', 'circle', 'bezier', 'hermite', 'line', 'scale', 'move', 'rotate', 'save', 'cylinder' ]
 
 def parse_file( fname, edges, polygons, csystems, screen, zbuffer, color ):
 
@@ -69,7 +69,7 @@ def parse_file( fname, edges, polygons, csystems, screen, zbuffer, color ):
     clear_screen(screen)
     clear_zbuffer(zbuffer)
     step = 100
-    step_3d = 20
+    step_3d = 100
 
     c = 0
     while c < len(lines):
