@@ -160,8 +160,8 @@ def run(filename):
             if c == 'mesh':
                 if command['constants']:
                     reflect = command['constants']
-                add_mesh(tmp, args[0]) # add_mesh in draw.py *
-                matrix_mult( stack[-1], tmp )
+                add_mesh(tmp, args[0] + '.obj') # add_mesh in draw.py *
+                matrix_mult( stack[-1], tmp)
                 draw_polygons(tmp, screen, zbuffer, view, ambient, light, symbols, reflect)
                 tmp = []
                 reflect = '.white'
