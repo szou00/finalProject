@@ -282,8 +282,8 @@ def add_cylinder(polygons, cx, cy, cz, r, h, step):
                     b1[p][1],
                     b1[p][2],
                     b2[p+1][0],
-                    b2[p+1][0],
-                    b2[p+1][0],
+                    b2[p+1][1],
+                    b2[p+1][2],
                     b2[p][0],
                     b2[p][1],
                     b2[p][2])
@@ -306,8 +306,8 @@ def add_cylinder(polygons, cx, cy, cz, r, h, step):
                     b2[p][1],
                     b2[p][2],
                     b2[p+1][0],
-                    b2[p+1][0],
-                    b2[p+1][0])
+                    b2[p+1][1],
+                    b2[p+1][2])
 
 
 def add_circle( points, cx, cy, cz, r, step ):

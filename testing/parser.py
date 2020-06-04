@@ -96,7 +96,7 @@ def parse_file( fname, edges, polygons, csystems, screen, zbuffer, color ):
             polygons = []
 
         elif line == 'torus':
-            #print 'TORUS\t' + str(args)
+            print ('TORUS\t' + str(args))
             add_torus(polygons,
                       float(args[0]), float(args[1]), float(args[2]),
                       float(args[3]), float(args[4]), step_3d)
