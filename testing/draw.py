@@ -1,91 +1,71 @@
 from display import *
 from matrix import *
 from gmath import *
+import random
+
+def scanline_convert(polygons, i, screen, zbuffer ):
+    color = [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)]
+
+    points = [polygons[i], polygons[i + 1], polygons[i + 2]]
+
+    top = points[points.index(max(points, key=lambda x:int(x[1])))]
+    points.remove(top)
+
+    bottom = points[points.index(min(points, key=lambda x:int(x[1])))]
+    points.remove(bottom)
+
+    middle = points.pop()
+
+    x0 = bottom[0]
+    x1 = bottom[0]
+
+    y = bottom[1]
+
+    z0 = bottom[2]
+    z1 = middle[2]
+
+    if top[1] != bottom[1]:
+        dx0 = (top[0] - x0) / (top[1] - bottom[1])
+        dz0 = (top[2] - z0) / (top[1] - bottom[1])
+    else:
+        dx0 = 0
+        dz0 = 0
+
+    if middle[1] != bottom[1]:
+        dx1 = (middle[0] - x0) / (middle[1] - bottom[1])
+        dz1 = (middle[2] - z0) / (middle[1] - bottom[1])
+    else:
+        dx1 = 0
+        dz1 = 0
 
 
-def add_mesh(polygons, file):
-    v = []
-    n = []
-    file = open(file, 'r')
-    for line in file.readlines():
-        p = line.split()
-        if len(line) > 1:
-            if p[0] == "v":
+    while y < middle[1]:
+        draw_line(int(x0), int(y), int(z0), int(x1), int(y), int(z1), screen, zbuffer, color)
+        x0 += dx0
+        x1 += dx1
+        z0 += dz0
+        z1 += dz1
+        y += 1
 
-                v.append([x, y, z])
-            if p[0] == "vn":
+    y = middle[1]
+    x1 = middle[0]
+    z1 = middle[2]
 
-            if p[0] == "f":
+    if middle[1] != top[1]:
+        dx1 = (top[0] - x1) / (top[1] - middle[1])
+        dz1 = (top[2] - z1) / (top[1] - middle[1])
+    else:
+        dx1 = 0
+        dz1 = 0
 
-    file.close()
 
-def draw_scanline(x0, z0, x1, z1, y, screen, zbuffer, color):
-    if x0 > x1:
-        tx = x0
-        tz = z0
-        x0 = x1
-        z0 = z1
-        x1 = tx
-        z1 = tz
-
-    x = x0
-    z = z0
-    delta_z = (z1 - z0) / (x1 - x0 + 1) if (x1 - x0 + 1) != 0 else 0
-
-    while x <= x1:
-        plot(screen, zbuffer, color, x, y, z)
-        x+= 1
-        z+= delta_z
-
-def scanline_convert(polygons, i, screen, zbuffer, color):
-    flip = False
-    BOT = 0
-    TOP = 2
-    MID = 1
-
-    points = [ (polygons[i][0], polygons[i][1], polygons[i][2]),
-               (polygons[i+1][0], polygons[i+1][1], polygons[i+1][2]),
-               (polygons[i+2][0], polygons[i+2][1], polygons[i+2][2]) ]
-
-    # alas random color, we hardly knew ye
-    #color = [0,0,0]
-    #color[RED] = (23*(i/3)) %256
-    #color[GREEN] = (109*(i/3)) %256
-    #color[BLUE] = (227*(i/3)) %256
-
-    points.sort(key = lambda x: x[1])
-    x0 = points[BOT][0]
-    z0 = points[BOT][2]
-    x1 = points[BOT][0]
-    z1 = points[BOT][2]
-    y = int(points[BOT][1])
-
-    distance0 = int(points[TOP][1]) - y * 1.0 + 1
-    distance1 = int(points[MID][1]) - y * 1.0 + 1
-    distance2 = int(points[TOP][1]) - int(points[MID][1]) * 1.0 + 1
-
-    dx0 = (points[TOP][0] - points[BOT][0]) / distance0 if distance0 != 0 else 0
-    dz0 = (points[TOP][2] - points[BOT][2]) / distance0 if distance0 != 0 else 0
-    dx1 = (points[MID][0] - points[BOT][0]) / distance1 if distance1 != 0 else 0
-    dz1 = (points[MID][2] - points[BOT][2]) / distance1 if distance1 != 0 else 0
-
-    while y <= int(points[TOP][1]):
-        if ( not flip and y >= int(points[MID][1])):
-            flip = True
-
-            dx1 = (points[TOP][0] - points[MID][0]) / distance2 if distance2 != 0 else 0
-            dz1 = (points[TOP][2] - points[MID][2]) / distance2 if distance2 != 0 else 0
-            x1 = points[MID][0]
-            z1 = points[MID][2]
-
-        #draw_line(int(x0), y, z0, int(x1), y, z1, screen, zbuffer, color)
-        draw_scanline(int(x0), z0, int(x1), z1, y, screen, zbuffer, color)
-        x0+= dx0
-        z0+= dz0
-        x1+= dx1
-        z1+= dz1
-        y+= 1
-
+    while y < top[1]:
+        draw_line(int(x0), int(y), int(z0), int(x1), int(y), int(z1), screen, zbuffer, color)
+        x0 += dx0
+        x1 += dx1
+        z0 += dz0
+        z1 += dz1
+        y += 1
 
 
 def add_polygon( polygons, x0, y0, z0, x1, y1, z1, x2, y2, z2 ):
@@ -93,7 +73,7 @@ def add_polygon( polygons, x0, y0, z0, x1, y1, z1, x2, y2, z2 ):
     add_point(polygons, x1, y1, z1)
     add_point(polygons, x2, y2, z2)
 
-def draw_polygons( polygons, screen, zbuffer, view, ambient, light, symbols, reflect):
+def draw_polygons( polygons, screen, zbuffer, color ):
     if len(polygons) < 2:
         print('Need at least 3 points to draw')
         return
@@ -102,34 +82,9 @@ def draw_polygons( polygons, screen, zbuffer, view, ambient, light, symbols, ref
     while point < len(polygons) - 2:
 
         normal = calculate_normal(polygons, point)[:]
-
         #print normal
         if normal[2] > 0:
-
-            color = get_lighting(normal, view, ambient, light, symbols, reflect )
-            scanline_convert(polygons, point, screen, zbuffer, color)
-
-            # draw_line( int(polygons[point][0]),
-            #            int(polygons[point][1]),
-            #            polygons[point][2],
-            #            int(polygons[point+1][0]),
-            #            int(polygons[point+1][1]),
-            #            polygons[point+1][2],
-            #            screen, zbuffer, color)
-            # draw_line( int(polygons[point+2][0]),
-            #            int(polygons[point+2][1]),
-            #            polygons[point+2][2],
-            #            int(polygons[point+1][0]),
-            #            int(polygons[point+1][1]),
-            #            polygons[point+1][2],
-            #            screen, zbuffer, color)
-            # draw_line( int(polygons[point][0]),
-            #            int(polygons[point][1]),
-            #            polygons[point][2],
-            #            int(polygons[point+2][0]),
-            #            int(polygons[point+2][1]),
-            #            polygons[point+2][2],
-            #            screen, zbuffer, color)
+            scanline_convert(polygons, point, screen, zbuffer)
         point+= 3
 
 
@@ -287,7 +242,7 @@ def add_cylinder(polygons, cx, cy, cz, r, h, step):
     add_circle(b2, cx, cy, cz+h, r, step); #let b2 equal the points that are in this circle
 
     #base
-    for p in range(0, len(top)-1):
+    for p in range(0, len(b1)-1):
         add_polygon(polygons,         #
                     b1[p][0],
                     b1[p][1],
@@ -310,7 +265,7 @@ def add_cylinder(polygons, cx, cy, cz, r, h, step):
                     b2[p+1][2])
 
     #body
-    for p in range(0, len(top)-1):
+    for p in range(0, len(b1)-1):
         #front side
         add_polygon(polygons,
                     b1[p][0],
@@ -328,33 +283,31 @@ def add_cylinder(polygons, cx, cy, cz, r, h, step):
                     b1[p][2],
                     b2[p+1][0],
                     b2[p+1][0],
-                    b2[P+1][0],
+                    b2[p+1][0],
                     b2[p][0],
                     b2[p][1],
                     b2[p][2])
         #back side
         add_polygon(polygons,
-                    b1[p+1][0]
-                    b1[p+1][1]
-                    b1[p+1][2]
-                    b1[p][0]
-                    b1[p][1]
-                    b1[p][2]
-                    b2[p][0]
-                    b2[p][1]
+                    b1[p+1][0],
+                    b1[p+1][1],
+                    b1[p+1][2],
+                    b1[p][0],
+                    b1[p][1],
+                    b1[p][2],
+                    b2[p][0],
+                    b2[p][1],
                     b2[p][2])
         add_polygon(polygons,
-                    b1[p+1][0]
-                    b1[p+1][1]
-                    b1[p+1][2]
-                    b2[p][0]
-                    b2[p][1]
-                    b2[p][2]
-                    b2[p+1][0]
-                    b2[p+1][0]
+                    b1[p+1][0],
+                    b1[p+1][1],
+                    b1[p+1][2],
+                    b2[p][0],
+                    b2[p][1],
+                    b2[p][2],
+                    b2[p+1][0],
+                    b2[p+1][0],
                     b2[p+1][0])
-
-
 
 
 def add_circle( points, cx, cy, cz, r, step ):
@@ -413,7 +366,6 @@ def add_edge( matrix, x0, y0, z0, x1, y1, z1 ):
 
 def add_point( matrix, x, y, z=0 ):
     matrix.append( [x, y, z, 1] )
-
 
 
 def draw_line( x0, y0, z0, x1, y1, z1, screen, zbuffer, color ):
@@ -475,10 +427,13 @@ def draw_line( x0, y0, z0, x1, y1, z1, screen, zbuffer, color ):
             loop_start = y1
             loop_end = y
 
-    dz = (z1 - z0) / distance if distance != 0 else 0
+    if distance != 0:
+        dz = (z1 - z0) / distance
+    else:
+        dz = 0
 
     while ( loop_start < loop_end ):
-        plot( screen, zbuffer, color, x, y, z )
+        plot( screen, zbuffer, color, x, y, 0 )
         if ( (wide and ((A > 0 and d > 0) or (A < 0 and d < 0))) or
              (tall and ((A > 0 and d < 0) or (A < 0 and d > 0 )))):
 
@@ -489,6 +444,6 @@ def draw_line( x0, y0, z0, x1, y1, z1, screen, zbuffer, color ):
             x+= dx_east
             y+= dy_east
             d+= d_east
-        z+= dz
+        z += dz
         loop_start+= 1
-    plot( screen, zbuffer, color, x, y, z )
+    plot( screen, zbuffer, color, x, y, 0 )
