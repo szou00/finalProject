@@ -20,7 +20,6 @@ def add_mesh(polygons, file):
                 z = float(p[3])
                 v.append([x, y, z])
             if p[0] == "f":
-                line = line[1:]
                 count = 2
                 while count < len(line):
                     p0 = int(line[0]) - 1
