@@ -11,8 +11,8 @@ def add_mesh(polygons, file):
         p = line.split() # have to check if this works
         print("split line: " + str(p))
         print(str(len(p)) + " = length")
-        if len(line) > 1:
-            if len(line) == 0:
+        if len(p) > 1:
+            if len(p) == 0:
                 pass
             if p[0] == "v":
                 x = float(p[1])
@@ -23,6 +23,7 @@ def add_mesh(polygons, file):
                 line = line[1:]
                 count = 2
                 while count < len(line):
+                    print("int-ing: "+ line)
                     p0 = int(line[0]) - 1
                     p1 = int(line[count - 1]) - 1
                     p2 = int(line[count]) - 1

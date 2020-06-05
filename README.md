@@ -1,14 +1,11 @@
-# Final Project 
+# Final Project
 # Sharon Zou and Christina Tan
-# Period 4 
+# Period 4
 (Our original proposal was accidentally deleted after changing our files)
 
 Features:
 
-Light 💡: Add a light to the symbol table. When calculating diffuse and specular: loop through all the lights.
+- Mesh 💡: Use an external .obj file for polygons
 
-
-Set 👇: Assign a value to a knob
-
-
-Save knobs 🕹 : Save current knob values to a list
+- Primitive Shapes 👇:
+    - Cylinder 
