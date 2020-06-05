@@ -3,19 +3,19 @@ move
 250 250 0
 rotate
 y 90
-cylinder
-0 0 0 100 200
-display
-clear
-rotate
-x 90
-cylinder
+pyramid
 0 0 0 100 200
 display
 clear
 rotate
 x 45
-cylinder
+pyramid
+0 0 0 100 200
+display
+clear
+rotate
+x 45
+pyramid
 0 0 0 100 200
 display
 clear
@@ -25,6 +25,6 @@ rotate
 x 45
 rotate
 y 45
-cylinder
+pyramid
 0 0 0 100 200
 display

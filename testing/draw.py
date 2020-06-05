@@ -309,6 +309,46 @@ def add_cylinder(polygons, cx, cy, cz, r, h, step):
                     b2[p+1][1],
                     b2[p+1][2])
 
+def add_pyramid(polygons, x, y, z, height, s):
+    s = s / 2.0
+    b_y = y - height
+    left = x - s
+    right = x + s
+    back = z - s
+    front = z + s
+
+    # face1
+    add_polygon(polygons, x, y, z, left, b_y, front, right, b_y, front)
+    # face2
+    add_polygon(polygons, x, y, z, right, b_y, front, right, b_y, back)
+    # face3
+    add_polygon(polygons, x, y, z, right, b_y, back, left, b_y, back)
+    # face4
+    add_polygon(polygons, x, y, z, left, b_y, back, left, b_y, front)
+    # bottom
+    add_polygon(polygons, left, b_y, front, right, b_y, back, right, b_y, front)
+    add_polygon(polygons, left, b_y, front, left, b_y, back, right, b_y, back)
+
+# def add_pyramid(polygons, x, y, z, height, s):
+#     s = s / 2.0
+#     b_y = y - height
+#     left = x - s
+#     right = x + s
+#     back = z - s
+#     front = z + s
+#
+#     # face1
+#     add_polygon(polygons, x, y, z, left, b_y, front, right, b_y, front)
+#     # face2
+#     add_polygon(polygons, x, y, z, right, b_y, front, right, b_y, back)
+#     # face3
+#     add_polygon(polygons, x, y, z, right, b_y, back, left, b_y, back)
+#     # face4
+#     add_polygon(polygons, x, y, z, left, b_y, back, left, b_y, front)
+#     # bottom
+#     add_polygon(polygons, left, b_y, front, right, b_y, back, right, b_y, front)
+#     add_polygon(polygons, left, b_y, front, left, b_y, back, right, b_y, back)
+
 
 def add_circle( points, cx, cy, cz, r, step ):
     x0 = r + cx

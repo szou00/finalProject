@@ -59,7 +59,7 @@ The file follows the following format:
 
 See the file script for an example of the file format
 """
-ARG_COMMANDS = [ 'box', 'sphere', 'torus', 'circle', 'bezier', 'hermite', 'line', 'scale', 'move', 'rotate', 'save', 'cylinder' ]
+ARG_COMMANDS = [ 'box', 'sphere', 'torus', 'circle', 'bezier', 'hermite', 'line', 'scale', 'move', 'rotate', 'save', 'cylinder', 'pyramid' ]
 
 def parse_file( fname, edges, polygons, csystems, screen, zbuffer, color ):
 
@@ -121,6 +121,15 @@ def parse_file( fname, edges, polygons, csystems, screen, zbuffer, color ):
             matrix_mult(csystems[-1], polygons)
             draw_polygons(polygons, screen, zbuffer, color)
             polygons = []
+
+        elif line == 'pyramid':
+            print ('PYRAMID\t' + str(args))
+            add_pyramid(polygons,
+                    float(args[0]), float(args[1]), float(args[2]),
+                    float(args[3]), float(args[4]))
+            matrix_mult(csystems[-1], polygons)
+            draw_polygons(polygons, screen, zbuffer, color)
+            edges = []
 
         elif line == 'circle':
             #print 'CIRCLE\t' + str(args)
