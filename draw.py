@@ -5,10 +5,15 @@ from gmath import *
 
 def add_mesh(polygons, file):
     v = []
+    print('hi ....?')
     file = open(file, 'r')
     for line in file.readlines():
         p = line.split() # have to check if this works
+        print("split line: " + str(p))
+        print(str(len(p)) + " = length")
         if len(line) > 1:
+            if len(line) == 0:
+                pass
             if p[0] == "v":
                 x = float(p[1])
                 y = float(p[2])
