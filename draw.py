@@ -293,79 +293,79 @@ def generate_torus( cx, cy, cz, r0, r1, step ):
             points.append([x, y, z])
     return points
 
-# def add_cylinder(polygons, cx, cy, cz, r, h, step):
-#     b1 = [] #top
-#     b2 = [] #bottom
-#     add_circle(b1, cx, cy, cz, r, step); #let b1 equal the points that are in this circle
-#     add_circle(b2, cx, cy, cz+h, r, step); #let b2 equal the points that are in this circle
-#
-#     #base
-#     for p in range(0, len(top)-1):
-#         add_polygon(polygons,         #
-#                     b1[p][0],
-#                     b1[p][1],
-#                     b1[p][2],
-#                     cx,
-#                     cy,
-#                     cz,
-#                     b1[p+1][0],
-#                     b1[p+1][1],
-#                     b1[p+1][2])
-#         add_polygon(polygons,
-#                     cx,
-#                     cy,
-#                     cz+h,
-#                     b2[p][0],
-#                     b2[p][1],
-#                     b2[p][2],
-#                     b2[p+1][0],
-#                     b2[p+1][1],
-#                     b2[p+1][2])
-#
-#     #body
-#     for p in range(0, len(top)-1):
-#         #front side
-#         add_polygon(polygons,
-#                     b1[p][0],
-#                     b1[p][1],
-#                     b1[p][2],
-#                     b1[p+1][0],
-#                     b1[p+1][1],
-#                     b1[p+1][2],
-#                     b2[p+1][0],
-#                     b2[p+1][1],
-#                     b2[p+1][2])
-#         add_polygon(polygons,
-#                     b1[p][0],
-#                     b1[p][1],
-#                     b1[p][2],
-#                     b2[p+1][0],
-#                     b2[p+1][0],
-#                     b2[P+1][0],
-#                     b2[p][0],
-#                     b2[p][1],
-#                     b2[p][2])
-#         #back side
-#         add_polygon(polygons,
-#                     b1[p+1][0]
-#                     b1[p+1][1]
-#                     b1[p+1][2]
-#                     b1[p][0]
-#                     b1[p][1]
-#                     b1[p][2]
-#                     b2[p][0]
-#                     b2[p][1]
-#                     b2[p][2])
-#         add_polygon(polygons,
-#                     b1[p+1][0]
-#                     b1[p+1][1]
-#                     b1[p+1][2]
-#                     b2[p][0]
-#                     b2[p][1]
-#                     b2[p][2]
-#                     b2[p+1][0]
-#                     b2[p+1][0]
-#                     b2[p+1][0])
+def add_cylinder(polygons, cx, cy, cz, r, h, step):
+    b1 = [] #top
+    b2 = [] #bottom
+    add_circle(b1, cx, cy, cz, r, step); #let b1 equal the points that are in this circle
+    add_circle(b2, cx, cy, cz+h, r, step); #let b2 equal the points that are in this circle
+
+    #base
+    for p in range(0, len(b1)-1):
+        add_polygon(polygons,         #
+                    b1[p][0],
+                    b1[p][1],
+                    b1[p][2],
+                    cx,
+                    cy,
+                    cz,
+                    b1[p+1][0],
+                    b1[p+1][1],
+                    b1[p+1][2])
+        add_polygon(polygons,
+                    cx,
+                    cy,
+                    cz+h,
+                    b2[p][0],
+                    b2[p][1],
+                    b2[p][2],
+                    b2[p+1][0],
+                    b2[p+1][1],
+                    b2[p+1][2])
+
+    #body
+    for p in range(0, len(b1)-1):
+        #front side
+        add_polygon(polygons,
+                    b1[p][0],
+                    b1[p][1],
+                    b1[p][2],
+                    b1[p+1][0],
+                    b1[p+1][1],
+                    b1[p+1][2],
+                    b2[p+1][0],
+                    b2[p+1][1],
+                    b2[p+1][2])
+        add_polygon(polygons,
+                    b1[p][0],
+                    b1[p][1],
+                    b1[p][2],
+                    b2[p+1][0],
+                    b2[p+1][1],
+                    b2[p+1][2],
+                    b2[p][0],
+                    b2[p][1],
+                    b2[p][2])
+        #back side
+        add_polygon(polygons,
+                    b1[p+1][0],
+                    b1[p+1][1],
+                    b1[p+1][2],
+                    b1[p][0],
+                    b1[p][1],
+                    b1[p][2],
+                    b2[p][0],
+                    b2[p][1],
+                    b2[p][2])
+        add_polygon(polygons,
+                    b1[p+1][0],
+                    b1[p+1][1],
+                    b1[p+1][2],
+                    b2[p][0],
+                    b2[p][1],
+                    b2[p][2],
+                    b2[p+1][0],
+                    b2[p+1][1],
+                    b2[p+1][2])
 
 
 
