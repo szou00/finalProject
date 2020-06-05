@@ -162,7 +162,6 @@ def run(filename):
                 if command['constants']:
                     reflect = command['constants']
                 add_mesh(tmp, args[0] + '.obj') # add_mesh in draw.py *
-                print("HELLOOOO" + tmp)
                 matrix_mult( stack[-1], tmp)
                 draw_polygons(tmp, screen, zbuffer, view, ambient, light, symbols, reflect)
                 tmp = []
