@@ -1,7 +1,7 @@
 from display import *
 from matrix import *
 from gmath import *
-
+import re
 
 def add_mesh(polygons, file):
     v = []
@@ -11,25 +11,28 @@ def add_mesh(polygons, file):
         p = line.split() # have to check if this works
         print("split line: " + str(p))
         print(str(len(p)) + " = length")
-        if len(line) > 1:
-            if len(line) == 0:
-                pass
+        if len(p) > 1:
             if p[0] == "v":
                 x = float(p[1])
                 y = float(p[2])
                 z = float(p[3])
                 v.append([x, y, z])
-            if p[0] == "f":
-                count = 2
-                while count < len(line):
-                    p0 = int(line[0]) - 1
-                    p1 = int(line[count - 1]) - 1
-                    p2 = int(line[count]) - 1
-                    add_polygon(edges,
-                                vert[p0][0], vert[p0][1], vert[p0][2],
-                                vert[p1][0], vert[p1][1], vert[p1][2],
-                                vert[p2][0], vert[p2][1], vert[p2][2])
-                    count += 1
+            # if p[0] == "f":
+            #     face = []
+            #     for j in range(1, len(p)):
+            #         if p[j].count('/') == 0:
+            #             face.append(v[int(value[j])-1])
+            #         else:
+            #             s = p[j].split('/')
+            #             face.append(v[int(s[0])-1])
+            #     if len(face) > 2:
+            #         for i in range(2, len(face)):
+            #             add_polygon(polygons, face[0][0],face[0][1],face[0][2],
+            #                                 face[i-1][0],face[i-1][1],face[i-1][2],
+            #                                  face[i][0],face[i][1],face[i][2])
+            #             add_polygon(polygons, face[i][0],face[i][1],face[i][2],
+            #                                      face[i-1][0],face[i-1][1],face[i-1][2],
+            #                                      face[0][0],face[0][1],face[0][2])
     file.close()
 
 def draw_scanline(x0, z0, x1, z1, y, screen, zbuffer, color):
