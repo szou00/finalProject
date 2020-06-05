@@ -1,38 +1,37 @@
 from display import *
 from matrix import *
 from gmath import *
-import re
 
 def add_mesh(polygons, file):
-    v = []
     print('hi ....?')
     file = open(file, 'r')
-    for line in file.readlines():
+    lines = file.read().split("\n")
+    for line in lines:
+        faces = []
         p = line.split() # have to check if this works
-        print("split line: " + str(p))
-        print(str(len(p)) + " = length")
         if len(p) > 1:
             if p[0] == "v":
+                v = []
                 x = float(p[1])
                 y = float(p[2])
                 z = float(p[3])
                 v.append([x, y, z])
-            # if p[0] == "f":
-            #     face = []
-            #     for j in range(1, len(p)):
-            #         if p[j].count('/') == 0:
-            #             face.append(v[int(value[j])-1])
-            #         else:
-            #             s = p[j].split('/')
-            #             face.append(v[int(s[0])-1])
-            #     if len(face) > 2:
-            #         for i in range(2, len(face)):
-            #             add_polygon(polygons, face[0][0],face[0][1],face[0][2],
-            #                                 face[i-1][0],face[i-1][1],face[i-1][2],
-            #                                  face[i][0],face[i][1],face[i][2])
-            #             add_polygon(polygons, face[i][0],face[i][1],face[i][2],
-            #                                      face[i-1][0],face[i-1][1],face[i-1][2],
-            #                                      face[0][0],face[0][1],face[0][2])
+            elif p[0] == "f":
+                f = []
+                for x in line[1:]:
+                    print(str(line[1:]) + ": x!!!")
+                    f.append(int(x))
+                faces.append(f)
+
+        for f in faces:
+            if len(f) < 3:
+                print("Too few points")
+            p0 = v[f[0]]
+            p1 = v[f[1]]
+            p2 = v[f[2]]
+            add_polygon(polygons, p0[0], p0[1], p0[2],
+                                  p1[0], p1[1], p1[2],
+                                  p2[0], p2[1], p2[2])
     file.close()
 
 def draw_scanline(x0, z0, x1, z1, y, screen, zbuffer, color):
@@ -410,7 +409,32 @@ def add_pyramid(polygons, x, y, z, height, width):
 
 
 
+def add_cone(polygons, cx, cy, cz, r, h, step):
+    top = []
+    bottom = []
+    add_circle(top, cx, cy, cz + h, r, step)
+    add_circle(bottom, cx, cy, cz, r, step)
 
+    #cone
+    for p in range(0, len(top) - 1):
+        add_polygon(polygons, cx, cy, cz + h,
+                    top[p][0],
+                    top[p][1],
+                    top[p][2],
+                    top[p+1][0],
+                    top[p+1][1],
+                    top[p+1][2])
+    #base
+    for p in range(0, len(top) - 1):
+        add_polygon(polygons,
+                    top[p][0],
+                    top[p][1],
+                    top[p][2],
+                    cx, cy, cz,
+                    top[p+1][0],
+                    top[p+1][1],
+                    top[p+1][2])
+                    
 def add_circle( points, cx, cy, cz, r, step ):
     x0 = r + cx
     y0 = cy

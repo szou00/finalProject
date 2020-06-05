@@ -4,7 +4,8 @@ constants shiny_teal 0.3 0.0 0.0 0.3 0.2 0.8 0.3 0.2 0.8
 constants dull_yellow 0.3 0.8 0.2 0.3 0.8 0.2 0 0 0
 push
 move 250 250 0
-//mesh :cube
+rotate x 45
+cone 0 0 0 30 60
 sphere shiny_purple -100 150 0 80
 sphere shiny_teal 100 150 0 80
 rotate x 20
