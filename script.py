@@ -151,16 +151,18 @@ def run(filename):
                 print('\tkob: ' + knob + '\tvalue: ' + str(frame[knob]))
 
         for command in commands:
-            print(command)
+            #print(command) ***********
             c = command['op']
             args = command['args']
             knob_value = 1
 
 # ********************************
             if c == 'mesh':
+                print("HELLOOOO")
                 if command['constants']:
                     reflect = command['constants']
                 add_mesh(tmp, args[0] + '.obj') # add_mesh in draw.py *
+                print("HELLOOOO" + tmp)
                 matrix_mult( stack[-1], tmp)
                 draw_polygons(tmp, screen, zbuffer, view, ambient, light, symbols, reflect)
                 tmp = []
