@@ -16,11 +16,8 @@ tokens = (
     "SPHERE",
     "BOX",
     "CYLINDER",
-<<<<<<< HEAD
     "PYRAMID",
-=======
     "CONE",
->>>>>>> 4cdf1b858ba40cb61f6186d5c64de8002f621e02
     "LINE",
     "MESH",
     "TEXTURE",
@@ -61,11 +58,8 @@ reserved = {
     "sphere" : "SPHERE",
     "box" : "BOX",
     "cylinder" : "CYLINDER",
-<<<<<<< HEAD
     "pyramid" : "PYRAMID",
-=======
     "cone": "CONE",
->>>>>>> 4cdf1b858ba40cb61f6186d5c64de8002f621e02
     "line" : "LINE",
     "mesh" : "MESH",
     "texture" : "TEXTURE",
@@ -242,19 +236,28 @@ def p_command_cylinder(p):
     cmd['args'] = p[arg_start:arg_start+5]
     commands.append(cmd)
 
-<<<<<<< HEAD
 def p_command_pyramid(p):
     """command : PYRAMID NUMBER NUMBER NUMBER NUMBER NUMBER
                | PYRAMID NUMBER NUMBER NUMBER NUMBER NUMBER SYMBOL
                | PYRAMID SYMBOL NUMBER NUMBER NUMBER NUMBER NUMBER
                | PYRAMID SYMBOL NUMBER NUMBER NUMBER NUMBER NUMBER SYMBOL"""
-=======
+    cmd = {'op' : p[1], 'constants' : None, 'cs' : None, 'args':[]}
+    arg_start = 2
+    if isinstance(p[2], str):
+        cmd['constants'] = p[2]
+        arg_start = 3
+    if len(p) == 8 and isinstance(p[7], str):
+        cmd['cs'] = p[7]
+    if len(p) == 9 and isinstance(p[8], str):
+          cmd['cs'] = p[8]
+    cmd['args'] = p[arg_start:arg_start+5]
+    commands.append(cmd)
+
 def p_command_cone(p):
     """command : CONE NUMBER NUMBER NUMBER NUMBER NUMBER
                | CONE NUMBER NUMBER NUMBER NUMBER NUMBER SYMBOL
                | CONE SYMBOL NUMBER NUMBER NUMBER NUMBER NUMBER
                | CONE SYMBOL NUMBER NUMBER NUMBER NUMBER NUMBER SYMBOL"""
->>>>>>> 4cdf1b858ba40cb61f6186d5c64de8002f621e02
     cmd = {'op' : p[1], 'constants' : None, 'cs' : None, 'args':[]}
     arg_start = 2
     if isinstance(p[2], str):
