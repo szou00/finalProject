@@ -1,20 +1,8 @@
 push
 move
 250 250 0
-rotate
-y 90
-pyramid
-0 0 0 100 200
-display
-clear
-rotate
-x 45
-pyramid
-0 0 0 100 200
-display
-clear
-rotate
-x 45
+box
+20 20 0 100 100 20
 pyramid
 0 0 0 100 200
 display
@@ -25,6 +13,19 @@ rotate
 x 45
 rotate
 y 45
+box
+20 20 0 100 100 20
 pyramid
 0 0 0 100 200
 display
+clear
+rotate
+z -45
+rotate
+x -45
+rotate
+y -45
+pyramid
+0 0 0 100 200
+display
+clear

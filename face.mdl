@@ -8,8 +8,8 @@ rotate x 45
 cone 0 0 0 30 60
 sphere shiny_purple -100 150 0 80
 sphere shiny_teal 100 150 0 80
-rotate x 20
-pyramid dull_yellow 20 20 0 50 100
+rotate y 30
+pyramid dull_yellow 20 20 0 200 200
 pop
 push
 move 0 -150 0

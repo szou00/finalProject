@@ -369,43 +369,32 @@ def add_cylinder(polygons, cx, cy, cz, r, h, step):
                     b2[p+1][1],
                     b2[p+1][2])
 
-# def add_pyramid(polygons, x, y, z, b, h):
-#     w = b/2.0 #the width of the base from the center
-#
-#     #front
-#     add_polygon(polygons, x, y, z,
-#                           x-w, y-h, z+w,
-#                           x+w, y-h, z+w)
-#     #left
-#     add_polygon(polygons, x, y, z,
-#                           x-w, y-h, z-w,
-#                           x-w, y-h, z+w)
-#     #right
-#     add_polygon(polygons, x, y, x,
-#                           x+w, y-h, z-w,
-#                           x+w, y-h, z+w)
-#     #back
-#     add_polygon(polygons, x, y, z,
-#                           x-w, y-h, z-w,
-#                           x+w, y-h, z-w)
-#     #bottom
-#     add_polygon(polygons, x-w, y-h, z-w,
-#                           x+w, y-h, z-w,
-#                           x+w, y-h, z+w)
-#     add_polygon(polygons, x+w, y-h, z+w,
-#                           x-w, y-h, z+w,
-#                           x-w, y-h, z-w)
+def add_pyramid(polygons, x, y, z, b, h):
+    w = b/2.0 #the width of the base from the center
 
-def add_pyramid(polygons, x, y, z, height, width):
-    x1 = x + width
-    y1 = y + height
-    z1 = z - width
-    add_polygon(polygons, x, y, z, x, y, z1, x1, y, z1)
-    add_polygon(polygons, x, y, z, x1, y, z, x1, y, z1)
-    add_polygon(polygons, x, y, z, x, y, z1, x + width/2, y1, z-width/2)
-    add_polygon(polygons, x1, y, z1, x1, y, z, x+width/2, y1, z-width/2)
-    add_polygon(polygons, x, y, z1, x1, y, z1, x+width/2, y1, z-width/2)
-    add_polygon(polygons, x1, y, z, x, y, z, x+width/2, y1, z-width/2)
+    #front
+    add_polygon(polygons, x, y, z,
+                          x-w, y-h, z+w,
+                          x+w, y-h, z+w)
+    #left
+    add_polygon(polygons, x, y, z,
+                          x-w, y-h, z-w,
+                          x-w, y-h, z+w)
+    #right
+    add_polygon(polygons, x, y, x,
+                          x+w, y-h, z-w,
+                          x+w, y-h, z+w)
+    #back
+    add_polygon(polygons, x, y, z,
+                          x-w, y-h, z-w,
+                          x+w, y-h, z-w)
+    # #bottom
+    add_polygon(polygons, x-w, y-h, z-w,
+                          x+w, y-h, z-w,
+                          x+w, y-h, z+w)
+    add_polygon(polygons, x+w, y-h, z+w,
+                          x-w, y-h, z+w,
+                          x-w, y-h, z-w)
 
 
 
@@ -434,7 +423,7 @@ def add_cone(polygons, cx, cy, cz, r, h, step):
                     top[p+1][0],
                     top[p+1][1],
                     top[p+1][2])
-                    
+
 def add_circle( points, cx, cy, cz, r, step ):
     x0 = r + cx
     y0 = cy

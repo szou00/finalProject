@@ -309,45 +309,32 @@ def add_cylinder(polygons, cx, cy, cz, r, h, step):
                     b2[p+1][1],
                     b2[p+1][2])
 
-def add_pyramid(polygons, x, y, z, height, s):
-    s = s / 2.0
-    b_y = y - height
-    left = x - s
-    right = x + s
-    back = z - s
-    front = z + s
+def add_pyramid(polygons, x, y, z, b, h):
+    w = b/2.0 #the width of the base from the center
 
-    # face1
-    add_polygon(polygons, x, y, z, left, b_y, front, right, b_y, front)
-    # face2
-    add_polygon(polygons, x, y, z, right, b_y, front, right, b_y, back)
-    # face3
-    add_polygon(polygons, x, y, z, right, b_y, back, left, b_y, back)
-    # face4
-    add_polygon(polygons, x, y, z, left, b_y, back, left, b_y, front)
-    # bottom
-    add_polygon(polygons, left, b_y, front, right, b_y, back, right, b_y, front)
-    add_polygon(polygons, left, b_y, front, left, b_y, back, right, b_y, back)
-
-# def add_pyramid(polygons, x, y, z, height, s):
-#     s = s / 2.0
-#     b_y = y - height
-#     left = x - s
-#     right = x + s
-#     back = z - s
-#     front = z + s
-#
-#     # face1
-#     add_polygon(polygons, x, y, z, left, b_y, front, right, b_y, front)
-#     # face2
-#     add_polygon(polygons, x, y, z, right, b_y, front, right, b_y, back)
-#     # face3
-#     add_polygon(polygons, x, y, z, right, b_y, back, left, b_y, back)
-#     # face4
-#     add_polygon(polygons, x, y, z, left, b_y, back, left, b_y, front)
-#     # bottom
-#     add_polygon(polygons, left, b_y, front, right, b_y, back, right, b_y, front)
-#     add_polygon(polygons, left, b_y, front, left, b_y, back, right, b_y, back)
+    #front
+    add_polygon(polygons, x, y, z,
+                          x-w, y-h, z+w,
+                          x+w, y-h, z+w)
+    #left
+    add_polygon(polygons, x, y, z,
+                          x-w, y-h, z-w,
+                          x-w, y-h, z+w)
+    #right
+    add_polygon(polygons, x, y, x,
+                          x+w, y-h, z-w,
+                          x+w, y-h, z+w)
+    #back
+    add_polygon(polygons, x, y, z,
+                          x-w, y-h, z-w,
+                          x+w, y-h, z-w)
+    # #bottom
+    add_polygon(polygons, x-w, y-h, z-w,
+                          x+w, y-h, z-w,
+                          x+w, y-h, z+w)
+    add_polygon(polygons, x+w, y-h, z+w,
+                          x-w, y-h, z+w,
+                          x-w, y-h, z-w)
 
 
 def add_circle( points, cx, cy, cz, r, step ):

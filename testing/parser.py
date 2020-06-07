@@ -129,7 +129,7 @@ def parse_file( fname, edges, polygons, csystems, screen, zbuffer, color ):
                     float(args[3]), float(args[4]))
             matrix_mult(csystems[-1], polygons)
             draw_polygons(polygons, screen, zbuffer, color)
-            edges = []
+            polygons = []
 
         elif line == 'circle':
             #print 'CIRCLE\t' + str(args)
