@@ -1,10 +1,8 @@
 # Final Project
 
 ## Team Members
-- Sharon Zou *Period 4*
-- Christina Tan *Period 4*
-
-*Our original proposal was accidentally deleted after changing our files*
+- Sharon Zou *(Period 4)*
+- Christina Tan *(Period 4)*
 
 ## Features Implemented:
 
