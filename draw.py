@@ -3,35 +3,45 @@ from matrix import *
 from gmath import *
 
 def add_mesh(polygons, file):
-    print('hi ....?')
     file = open(file, 'r')
-    lines = file.read().split("\n")
+    lines = file.readlines()
     for line in lines:
-        faces = []
-        p = line.split() # have to check if this works
+        p = line.split()
+        v = [] #vertices
+        f = [] #faces
         if len(p) > 1:
+            print(p)
             if p[0] == "v":
-                v = []
                 x = float(p[1])
                 y = float(p[2])
                 z = float(p[3])
                 v.append([x, y, z])
             elif p[0] == "f":
-                f = []
-                for x in line[1:]:
-                    print(str(line[1:]) + ": x!!!")
-                    f.append(int(x))
-                faces.append(f)
+                pts = []
+                for x in p[1:]:
+                    print("hi")
+                    print(line)
+                    print(x)
+                    pts.append(int(x) - 1)
+                f.append(pts)
+                print(f)
+                p0 = f[0]
+                print(p0)
+                p1 = f[1]
+                print(p1)
+                p2 = f[2]
+                print(p2)
+                if len(f) < 3:
+                    print("Too few points")
+                add_polygon(polygons, p0[0], p0[1], p0[2],
+                                          p1[0], p1[1], p1[2],
+                                          p2[0], p2[1], p2[2])
+                if len(f) == 4:
+                    p3 = f[3]
+                    add_polygon(polygons, p0[0], p0[1], p0[2],
+                                        p2[0], p2[1], p2[2],
+                                        p3[0], p3[1], p3[2])
 
-        for f in faces:
-            if len(f) < 3:
-                print("Too few points")
-            p0 = v[f[0]]
-            p1 = v[f[1]]
-            p2 = v[f[2]]
-            add_polygon(polygons, p0[0], p0[1], p0[2],
-                                  p1[0], p1[1], p1[2],
-                                  p2[0], p2[1], p2[2])
     file.close()
 
 def draw_scanline(x0, z0, x1, z1, y, screen, zbuffer, color):

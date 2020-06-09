@@ -191,7 +191,6 @@ def run(filename):
 
 # ********************************
             if c == 'mesh':
-                print("HELLOOOO")
                 if command['constants']:
                     reflect = command['constants']
                 add_mesh(tmp, args[0] + '.obj') # add_mesh in draw.py *
