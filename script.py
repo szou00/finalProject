@@ -78,19 +78,53 @@ def second_pass( commands, num_frames ):
             if ((start_frame < 0) or
                 (end_frame >= num_frames) or
                 (end_frame <= start_frame)):
-                print('Invalid vary command for knob: ' + knob_name)
+                print('Invalid vary command for knob: ' + knob_name + ' FRAME NUM ERROR')
                 exit()
 
-            delta = (end_value - start_value) / (end_frame - start_frame)
-
-            for f in range(num_frames):
-                if f == start_frame:
-                    value = start_value
-                    frames[f][knob_name] = value
-                elif f >= start_frame and f <= end_frame:
-                    value = start_value + delta * (f - start_frame)
-                    frames[f][knob_name] = value
+            #linear vary
+            if len(args) == 4:
+                delta = (end_value - start_value) / (end_frame - start_frame)
+                for f in range(num_frames):
+                    if f == start_frame:
+                        value = start_value
+                        frames[f][knob_name] = value
+                    elif f >= start_frame and f <= end_frame:
+                        value = start_value + delta * (f - start_frame)
+                        frames[f][knob_name] = value
                 #print 'knob: ' + knob_name + '\tvalue: ' + str(frames[f][knob_name])
+
+            #if vary has an extra arg
+            #pmean.com
+            elif len(args) == 5:
+                #if the extra arg is exponential
+                c = (1.5*(end_value-start_value))/(end_frame-start_frame)
+                a = (start_frame-end_frame)/(math.exp(c*start_frame)-math.exp(c*end_frame))
+                b = start_value-a * math.exp(start_frame)
+
+                if args[4] == 'exponential':
+                    for f in range(num_frames):
+                        x = f + start_frame
+                        y = a * math.exp(x*c) + b
+                        frames[int(x)][knob_name] = y
+
+                #not completely sure if this works yet
+                #if the extra arg is logarithmic
+                elif args[4] == 'logarithmic':
+                    c *= -1
+                    for f in range(num_frames):
+                        x = f + start_frame
+                        y = a * math.exp(x*c) + b
+                        frames[int(x)][knob_name] = y
+                else:
+                    print('Invalid vary command for knob: ' + knob_name + ' EXP/LOG ERROR')
+                    exit()
+
+            else:
+                print('Invalid vary command for knob: ' + knob_name + ' ARG NUMS ERROR')
+                exit()
+
+
+
     return frames
 
 
@@ -148,7 +182,7 @@ def run(filename):
             frame = frames[f]
             for knob in frame:
                 symbols[knob][1] = frame[knob]
-                print('\tkob: ' + knob + '\tvalue: ' + str(frame[knob]))
+                print('\tknob: ' + knob + '\tvalue: ' + str(frame[knob]))
 
         for command in commands:
             #print(command) ***********
