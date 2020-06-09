@@ -107,7 +107,7 @@ def second_pass( commands, num_frames ):
                         y = a * math.exp(x*c) + b
                         frames[int(x)][knob_name] = y
 
-                #not completely sure if this works yet
+                #not completely sure if this works yet #LOL
                 #if the extra arg is logarithmic
                 elif args[4] == 'logarithmic':
                     c *= -1
@@ -175,7 +175,6 @@ def run(filename):
         consts = ''
         coords = []
         coords1 = []
-
 
         #Set symbol values for multiple frames
         if num_frames > 1:

@@ -1,0 +1,92 @@
+frames 5
+basename mario_10
+constants bronze 0.2125 0.714 0.393548 0.1275 0.4284 0.271906 0.054 0.18144 0.166721
+
+push
+move -250 0 0 movy
+
+//======== THE BOXES ========
+
+//*rotate for shadow effect*
+//don't know why for rotate y the shadows are wonky
+rotate y 7
+rotate x -7
+
+//==== LEVEL 1 ====
+
+box bronze 0 0 0 25 -10 20
+box bronze 0 10 0 25 -30 20
+box bronze 25 30 0 15 -10 20
+box bronze 25 0 0 15 -30 20
+
+box bronze 40 0 0 25 -10 20
+box bronze 40 10 0 25 -30 20
+box bronze 65 30 0 15 -10 20
+box bronze 65 0 0 15 -30 20
+
+box bronze 80 0 0 25 -10 20
+box bronze 80 10 0 25 -30 20
+box bronze 105 30 0 15 -10 20
+box bronze 105 0 0 15 -30 20
+
+box bronze 120 0 0 25 -10 20
+box bronze 120 10 0 25 -30 20
+box bronze 145 30 0 15 -10 20
+box bronze 145 0 0 15 -30 20
+
+box bronze 160 0 0 25 -10 20
+box bronze 160 10 0 25 -30 20
+box bronze 185 30 0 15 -10 20
+box bronze 185 0 0 15 -30 20
+
+box bronze 200 0 0 25 -10 20
+box bronze 200 10 0 25 -30 20
+box bronze 225 30 0 15 -10 20
+box bronze 225 0 0 15 -30 20
+
+box bronze 240 0 0 25 -10 20
+box bronze 240 10 0 25 -30 20
+box bronze 265 30 0 15 -10 20
+box bronze 265 0 0 15 -30 20
+
+box bronze 280 0 0 25 -10 20
+box bronze 280 10 0 25 -30 20
+box bronze 305 30 0 15 -10 20
+box bronze 305 0 0 15 -30 20
+
+box bronze 320 0 0 25 -10 20
+box bronze 320 10 0 25 -30 20
+box bronze 345 30 0 15 -10 20
+box bronze 345 0 0 15 -30 20
+
+box bronze 360 0 0 25 -10 20
+box bronze 360 10 0 25 -30 20
+box bronze 385 30 0 15 -10 20
+box bronze 385 0 0 15 -30 20
+
+box bronze 400 0 0 25 -10 20
+box bronze 400 10 0 25 -30 20
+box bronze 425 30 0 15 -10 20
+box bronze 425 0 0 15 -30 20
+
+box bronze 440 0 0 25 -10 20
+box bronze 440 10 0 25 -30 20
+box bronze 465 30 0 15 -10 20
+box bronze 465 0 0 15 -30 20
+
+box bronze 480 0 0 25 -10 20
+box bronze 480 10 0 25 -30 20
+box bronze 505 30 0 15 -10 20
+box bronze 505 0 0 15 -30 20
+
+// === LEVEL TWO ===
+
+box bronze 0 40 0 25 -10 20
+box bronze 0 50 0 25 -30 20
+box bronze 25 70 0 15 -10 20
+box bronze 25 40 0 15 -30 20
+
+
+//======== END BOXES ========
+
+vary movy 0 4 0 1
