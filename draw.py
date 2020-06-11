@@ -2,47 +2,73 @@ from display import *
 from matrix import *
 from gmath import *
 
-def add_mesh(polygons, file):
-    file = open(file, 'r')
-    lines = file.readlines()
-    for line in lines:
-        p = line.split()
-        v = [] #vertices
-        f = [] #faces
-        if len(p) > 1:
-            print(p)
-            if p[0] == "v":
-                x = float(p[1])
-                y = float(p[2])
-                z = float(p[3])
-                v.append([x, y, z])
-            elif p[0] == "f":
-                pts = []
-                for x in p[1:]:
-                    print("hi")
-                    print(line)
-                    print(x)
-                    pts.append(int(x) - 1)
-                f.append(pts)
-                print(f)
-                p0 = f[0]
-                print(p0)
-                p1 = f[1]
-                print(p1)
-                p2 = f[2]
-                print(p2)
-                if len(f) < 3:
-                    print("Too few points")
-                add_polygon(polygons, p0[0], p0[1], p0[2],
-                                          p1[0], p1[1], p1[2],
-                                          p2[0], p2[1], p2[2])
-                if len(f) == 4:
-                    p3 = f[3]
-                    add_polygon(polygons, p0[0], p0[1], p0[2],
-                                        p2[0], p2[1], p2[2],
-                                        p3[0], p3[1], p3[2])
+# def add_mesh(polygons, file):
+#     file = open(file, 'r')
+#     lines = file.read().split("\n")
+#     for line in lines:
+#         p = line.split()
+#         v = [] #vertices
+#         f = [] #faces
+#         if len(p) > 1:
+#             print(p)
+#             if p[0] == "v":
+#                 x = float(p[1])
+#                 y = float(p[2])
+#                 z = float(p[3])
+#                 v.append([x, y, z])
+#             elif p[0] == "f":
+#                 pts = []
+#                 for x in p[1:]:
+#                     y = x.split("/")
+#                     # print("hi")
+#                     # print(line)
+#                     # print(x)
+#                     pts.append(int(y[0]))
+#                 print("points: " + str(pts))
+#                 print("f " + str(f))
+#                 print(f)
+#                 p0 = f[pts[0]]
+#                 print(p0)
+#                 p1 = f[pts[1]]
+#                 print(p1)
+#                 p2 = f[pts[2]]
+#                 print(p2)
+#                 if len(pts) < 3:
+#                     print("Too few points")
+#                 add_polygon(polygons, p0[0], p0[1], p0[2],
+#                                           p1[0], p1[1], p1[2],
+#                                           p2[0], p2[1], p2[2])
+#                 if len(pts) == 4:
+#                     p3 = f[pts[3]]
+#                     add_polygon(polygons, p0[0], p0[1], p0[2],
+#                                         p2[0], p2[1], p2[2],
+#                                         p3[0], p3[1], p3[2])
+    #
+    # file.close()
 
-    file.close()
+def add_mesh( polygons, filename ):
+    coords=[]
+    f = open(filename,'r')
+    lines = f.readlines()
+    f.close()
+    lines = [x.strip() for x in lines]
+    for line in lines:
+        splitline = line.split(' ')
+        if splitline[0] == 'v': #vertex
+            coords.append([float(splitline[1]),float(splitline[2]),float(splitline[3])])
+        #print(coords)
+        if splitline[0] == 'f': # face
+            vertices = splitline[1:]
+            counter = 2
+            while counter < len(vertices):
+                p0 = int(vertices[0]) - 1
+                p1 = int(vertices[counter - 1]) - 1
+                p2 = int(vertices[counter]) - 1
+                add_polygon(polygons, coords[p0][0], coords[p0][1], coords[p0][2],
+                                   coords[p1][0], coords[p1][1], coords[p1][2],
+                                   coords[p2][0], coords[p2][1], coords[p2][2])
+                counter += 1
+
 
 def draw_scanline(x0, z0, x1, z1, y, screen, zbuffer, color):
     if x0 > x1:
