@@ -1,14 +1,25 @@
 frames 5
 basename mario_10
 constants bronze 0.2125 0.714 0.393548 0.1275 0.4284 0.271906 0.054 0.18144 0.166721
+constants green 0.0 0.0 0.0 1.0 0.8 1.0 0.0 0.0 0.0
+constants light_green 0.0 0.4 0.04 1 0.5 0.7 0.0 0.0 0.0
+constants dark_green 0.0 0.4 0.04 0.05 0.5 0.7 0.0 0.4 0.04
+constants white 1 1 1 1 1 1 1 1 1
+constants red 0.2392156863 0.8 1.0 0.1215686275 0 1.0 0 0 0
+constants brown 1 1 .2 0.2 0.6 0.0 0.0 0.0 0.0
+constants orange 1.0 1.0 1.0 0.6 0.6 0.6 0.0 0.0 0.0
+constants black 0 0 0 0 0 0 0 0 0
+constants blue 0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0
 
 push
-move -250 0 0 movy
+//move -10 0 0 movy
 
 //======== THE BOXES ========
 
 //*rotate for shadow effect*
 //don't know why for rotate y the shadows are wonky
+
+push
 rotate y 7
 rotate x -7
 
@@ -86,7 +97,148 @@ box bronze 0 50 0 25 -30 20
 box bronze 25 70 0 15 -10 20
 box bronze 25 40 0 15 -30 20
 
+box bronze 40 40 0 25 -10 20
+box bronze 40 50 0 25 -30 20
+box bronze 65 70 0 15 -10 20
+box bronze 65 40 0 15 -30 20
 
+box bronze 80 40 0 25 -10 20
+box bronze 80 50 0 25 -30 20
+box bronze 105 70 0 15 -10 20
+box bronze 105 40 0 15 -30 20
+
+box bronze 120 40 0 25 -10 20
+box bronze 120 50 0 25 -30 20
+box bronze 145 70 0 15 -10 20
+box bronze 145 40 0 15 -30 20
+
+box bronze 160 40 0 25 -10 20
+box bronze 160 50 0 25 -30 20
+box bronze 185 70 0 15 -10 20
+box bronze 185 40 0 15 -30 20
+
+box bronze 200 40 0 25 -10 20
+box bronze 200 50 0 25 -30 20
+box bronze 225 70 0 15 -10 20
+box bronze 225 40 0 15 -30 20
+
+box bronze 240 40 0 25 -10 20
+box bronze 240 50 0 25 -30 20
+box bronze 265 70 0 15 -10 20
+box bronze 265 40 0 15 -30 20
+
+box bronze 280 40 0 25 -10 20
+box bronze 280 50 0 25 -30 20
+box bronze 305 70 0 15 -10 20
+box bronze 305 40 0 15 -30 20
+
+box bronze 320 40 0 25 -10 20
+box bronze 320 50 0 25 -30 20
+box bronze 345 70 0 15 -10 20
+box bronze 345 40 0 15 -30 20
+
+box bronze 360 40 0 25 -10 20
+box bronze 360 50 0 25 -30 20
+box bronze 385 70 0 15 -10 20
+box bronze 385 40 0 15 -30 20
+
+box bronze 400 40 0 25 -10 20
+box bronze 400 50 0 25 -30 20
+box bronze 425 70 0 15 -10 20
+box bronze 425 40 0 15 -30 20
+
+box bronze 440 40 0 25 -10 20
+box bronze 440 50 0 25 -30 20
+box bronze 465 70 0 15 -10 20
+box bronze 465 40 0 15 -30 20
+
+box bronze 480 40 0 25 -10 20
+box bronze 480 50 0 25 -30 20
+box bronze 505 70 0 15 -10 20
+box bronze 505 40 0 15 -30 20
+
+pop
 //======== END BOXES ========
 
-vary movy 0 4 0 1
+//======= BACKGROUND ========
+// * tube *
+push
+move 420 80 -20
+
+push
+rotate x -90
+cylinder green 0 0 0 30 40
+pop
+
+rotate x -2
+torus green 0 50 0 17 23
+pop
+
+// * grass *
+
+push
+rotate y -5
+pyramid light_green 100 120 -40 60 40
+pyramid light_green 140 120 -40 60 40
+pyramid light_green 180 120 -40 60 40
+pyramid dark_green 200 180 -200 150 100
+
+// * clouds * in placement for the obj mesh file cloud
+
+torus white 100 450 0 10 30
+torus white 410 395 0 10 30
+torus white 254 312 0 10 30
+pop
+
+//======== MARIO =========
+push
+
+move 100 125 20
+scale 3 3 3 appear
+
+box red 0 0 0 5 1 -1
+box red -1 -1 0 9 1 -1
+box bronze -1 -2 0 3 1 -1
+box orange 2 -2 0 2 1 -1
+box black 4 -2 0 1 2 -1
+box orange 5 -2 0 1 2 -1
+box bronze -2 -3 0 1 2 -1
+box orange -1 -3 0 1 2 -1
+box bronze 0 -3 0 1 2 -1
+box orange 1 -3 0 3 1 -1
+box orange 5 -3 0 2 1 -1
+box bronze 1 -4 0 1 1 -1
+box orange 2 -4 0 3 1 -1
+box black 5 -4 0 1 1 -1
+box orange 6 -4 0 3 1 -1
+box bronze -1 -5 0 1 1 -1
+box orange 0 -5 0 4 1 -1
+box black 4 -5 0 4 1 -1
+box orange 0 -6 0 6 1 -1
+box red -1 -7 0 1 4 -1
+box red 0 -7 0 1 3 -1
+box blue 1 -7 0 1 3 -1
+box red 2 -7 0 2 2 -1
+box blue 4 -7 0 1 3 -1
+box red 5 -7 0 1 3 -1
+box red 6 -7 0 1 4 -1
+box red -2 -8 0 1 2 -1
+box red 7 -8 0 1 2 -1
+box red -3 -9 0 1 1 -1
+box red 8 -9 0 1 1 -1
+box blue 1 -9 0 4 1 -1
+box orange -3 -10 0 2 3 -1
+box orange -1 -11 0 1 1 -1
+box blue 0 -10 0 6 3 -1
+box orange 6 -11 0 1 1 -1
+box orange 7 -10 0 2 3 -1
+box blue -1 -12 0 3 2 -1
+box blue 4 -12 0 3 2 -1
+box bronze -2 -14 0 3 1 -1
+box bronze -3 -15 0 4 1 -1
+box bronze 5 -14 0 3 1 -1
+box bronze 5 -15 0 4 1 -1
+
+
+vary appear 0 4 0 1
+//vary movy 0 4 0 1
