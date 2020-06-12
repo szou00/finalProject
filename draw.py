@@ -379,7 +379,6 @@ def add_cylinder(polygons, cx, cy, cz, r, h, step):
                     b2[p+1][1],
                     b2[p+1][2])
 
-#note to self: change x y z to cx cy cz
 def add_pyramid(polygons, x, y, z, b, h):
     w = b/2.0 #the width of the base from the center
 
@@ -392,7 +391,7 @@ def add_pyramid(polygons, x, y, z, b, h):
                           x-w, y-h, z-w,
                           x-w, y-h, z+w)
     #right
-    add_polygon(polygons, x, y, x,
+    add_polygon(polygons, x, y, z,
                           x+w, y-h, z-w,
                           x+w, y-h, z+w)
     #back
