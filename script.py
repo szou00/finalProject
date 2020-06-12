@@ -189,7 +189,6 @@ def run(filename):
             args = command['args']
             knob_value = 1
 
-# ********************************
             if c == 'mesh':
                 if command['constants']:
                     reflect = command['constants']
@@ -198,8 +197,6 @@ def run(filename):
                 draw_polygons(tmp, screen, zbuffer, view, ambient, light, symbols, reflect)
                 tmp = []
                 reflect = '.white'
-# ********************************
-
             elif c == 'box':
                 if command['constants']:
                     reflect = command['constants']

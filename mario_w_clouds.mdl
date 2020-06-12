@@ -1,5 +1,5 @@
-frames 5
-basename mario_10
+frames 41
+basename mario_41
 constants bronze 0.2125 0.714 0.393548 0.1275 0.4284 0.271906 0.054 0.18144 0.166721
 constants green 0.0 0.0 0.0 1.0 0.8 1.0 0.0 0.0 0.0
 constants light_green 0.0 0.4 0.04 1 0.5 0.7 0.0 0.0 0.0
@@ -182,12 +182,33 @@ pyramid light_green 100 120 -40 60 40
 pyramid light_green 140 120 -40 60 40
 pyramid light_green 180 120 -40 60 40
 pyramid dark_green 200 180 -200 150 100
+pop
 
-// * clouds * in placement for the obj mesh file cloud
+// * clouds *
 
-torus white 100 450 0 10 30
-torus white 410 395 0 10 30
-torus white 254 312 0 10 30
+//torus white 100 450 0 10 30
+//torus white 410 395 0 10 30
+//torus white 254 312 0 10 30
+
+push
+move 100 450 0
+move 100 0 0 cloud_left
+move -100 0 0 cloud_left2
+mesh: cloud5
+pop
+
+push
+move 410 395 0
+move -100 0 0 cloud_middle
+move 100 0 0 cloud_middle2
+mesh: cloud5
+pop
+
+push
+move 254 312 0
+move 100 0 0 cloud_right
+move -100 0 0 cloud_right2
+mesh: cloud5
 pop
 
 //======== MARIO =========
@@ -240,5 +261,14 @@ box bronze 5 -14 0 3 1 -1
 box bronze 5 -15 0 4 1 -1
 
 
-vary appear 0 4 0 1
+// each cloud has two variables: one to move forward
+// and one to move back to its original spot
+vary cloud_left 0 20 0 1
+vary cloud_left2 20 40 0 1
+vary cloud_middle 0 20 0 1
+vary cloud_middle2 20 40 0 1
+vary cloud_right 0 20 0 1
+vary cloud_right2 20 40 0 1
+
+vary appear 0 40 0 1
 //vary movy 0 4 0 1

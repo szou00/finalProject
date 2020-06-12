@@ -27,7 +27,8 @@ def get_lighting(normal, view, ambient, light, symbols, reflect ):
     normalize(n)
     normalize(light[LOCATION])
     normalize(view)
-    r = symbols[reflect][1]
+    r = symbols['.white'][1]
+
 
     a = calculate_ambient(ambient, r)
     d = calculate_diffuse(light, r, n)
