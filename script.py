@@ -155,9 +155,9 @@ def run(filename):
 
     color = [0, 0, 0]
     symbols['.white'] = ['constants',
-                         {'red': [0.2, 0.5, 0.5],
-                          'green': [0.2, 0.5, 0.5],
-                          'blue': [0.2, 0.5, 0.5]}]
+                         {'red': [0.2, 0.5, 0.5],#[0.2, 0.5, 0.5],[1,1,1],
+                          'green': [0.2, 0.5, 0.5],#[0.2, 0.5, 0.5],[1,1,1],
+                          'blue': [0.2, 0.5, 0.5]}]#[0.2, 0.5, 0.5]}][1,1,]}]
     reflect = '.white'
 
     (name, num_frames) = first_pass(commands)
@@ -189,17 +189,14 @@ def run(filename):
             args = command['args']
             knob_value = 1
 
-# ********************************
             if c == 'mesh':
                 if command['constants']:
-                    reflect = command['constants']
+                    reflect = '.white'
                 add_mesh(tmp, args[0] + '.obj') # add_mesh in draw.py *
                 matrix_mult( stack[-1], tmp)
                 draw_polygons(tmp, screen, zbuffer, view, ambient, light, symbols, reflect)
                 tmp = []
                 reflect = '.white'
-# ********************************
-
             elif c == 'box':
                 if command['constants']:
                     reflect = command['constants']

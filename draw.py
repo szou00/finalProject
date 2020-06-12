@@ -4,13 +4,11 @@ from gmath import *
 
 def add_mesh(polygons, file):
     file = open(file, 'r')
-    lines = file.readlines()
+    lines = file.read().split("\n")
+    v = [" "]
     for line in lines:
         p = line.split()
-        v = [] #vertices
-        f = [] #faces
-        if len(p) > 1:
-            print(p)
+        if len(p) > 0:
             if p[0] == "v":
                 x = float(p[1])
                 y = float(p[2])
@@ -19,29 +17,24 @@ def add_mesh(polygons, file):
             elif p[0] == "f":
                 pts = []
                 for x in p[1:]:
-                    print("hi")
-                    print(line)
-                    print(x)
-                    pts.append(int(x) - 1)
-                f.append(pts)
-                print(f)
-                p0 = f[0]
-                print(p0)
-                p1 = f[1]
-                print(p1)
-                p2 = f[2]
-                print(p2)
-                if len(f) < 3:
+                    f = x.split("/")
+                    pts.append(int(f[0]))
+                p0 = v[pts[0]]
+                p1 = v[pts[1]]
+                p2 = v[pts[2]]
+                if len(pts) < 3:
                     print("Too few points")
                 add_polygon(polygons, p0[0], p0[1], p0[2],
-                                          p1[0], p1[1], p1[2],
-                                          p2[0], p2[1], p2[2])
-                if len(f) == 4:
-                    p3 = f[3]
+                                p1[0], p1[1], p1[2],
+                                p2[0], p2[1], p2[2])
+                if len(pts) == 4:
+                    p3 = v[pts[3]]
+                    add_polygon(polygons, p0[0], p0[1], p0[2],
+                                    p1[0], p1[1], p1[2],
+                                    p2[0], p2[1], p2[2])
                     add_polygon(polygons, p0[0], p0[1], p0[2],
                                         p2[0], p2[1], p2[2],
                                         p3[0], p3[1], p3[2])
-
     file.close()
 
 def draw_scanline(x0, z0, x1, z1, y, screen, zbuffer, color):

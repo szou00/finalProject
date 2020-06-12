@@ -29,6 +29,7 @@ def get_lighting(normal, view, ambient, light, symbols, reflect ):
     normalize(view)
     r = symbols[reflect][1]
 
+
     a = calculate_ambient(ambient, r)
     d = calculate_diffuse(light, r, n)
     s = calculate_specular(light, r, view, n)
