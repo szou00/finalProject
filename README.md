@@ -16,7 +16,7 @@
 
 - Changed behavior of vary. Added a parameter to change how it calculates the change over time.
   Default is linear. To invoke exponential or logarithmic behavior, use syntax below 👇:
-  <br> *This feature was attempted but not completely successful* </br>
-  <br> *One bug is that when using logarithmic, the start frame can only be 0* </br>
+  <br> *This feature was attempted but not completely successful*
+  <br> *One bug is that when using logarithmic, the start frame can only be 0* 
     - Exponential : `vary spinny 0 49 0 1 exponential`
     - Logarithmic : `vary spinny 0 49 0 1 logarithmic`
