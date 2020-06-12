@@ -78,7 +78,7 @@ def second_pass( commands, num_frames ):
             if ((start_frame < 0) or
                 (end_frame >= num_frames) or
                 (end_frame <= start_frame)):
-                print('Invalid vary command for knob: ' + knob_name + ' FRAME NUM ERROR')
+                print('FRAME NUM ERROR - Invalid vary command for knob: ' + knob_name)
                 exit()
 
             #linear vary
@@ -94,20 +94,21 @@ def second_pass( commands, num_frames ):
                 #print 'knob: ' + knob_name + '\tvalue: ' + str(frames[f][knob_name])
 
             #if vary has an extra arg
-            #pmean.com
+            #with the help of pmean.com
             elif len(args) == 5:
-                #if the extra arg is exponential
+
                 c = (1.5*(end_value-start_value))/(end_frame-start_frame)
                 a = (start_frame-end_frame)/(math.exp(c*start_frame)-math.exp(c*end_frame))
                 b = start_value-a * math.exp(start_frame)
 
+                #if the extra arg is exponential
                 if args[4] == 'exponential':
                     for f in range(num_frames):
                         x = f + start_frame
                         y = a * math.exp(x*c) + b
-                        frames[int(x)][knob_name] = y
+                        frames[f][knob_name] = y
 
-                #not completely sure if this works yet #LOL
+                #this doesn't exactly work
                 #if the extra arg is logarithmic
                 elif args[4] == 'logarithmic':
                     c *= -1
@@ -115,15 +116,15 @@ def second_pass( commands, num_frames ):
                         x = f + start_frame
                         y = a * math.exp(x*c) + b
                         frames[int(x)][knob_name] = y
+                        if (y >= end_value):
+                            break
                 else:
-                    print('Invalid vary command for knob: ' + knob_name + ' EXP/LOG ERROR')
+                    print('EXP/LOG ERROR - Invalid vary command for knob: ' + knob_name)
                     exit()
 
             else:
-                print('Invalid vary command for knob: ' + knob_name + ' ARG NUMS ERROR')
+                print('ARG NUMS ERROR - Invalid vary command for knob: ' + knob_name)
                 exit()
-
-
 
     return frames
 
@@ -237,9 +238,7 @@ def run(filename):
             elif c == 'pyramid':
                 if command['constants']:
                     reflect = command['constants']
-                add_pyramid(tmp,
-                        args[0], args[1], args[2],
-                        args[3], args[4])
+                add_pyramid(tmp, args[0], args[1], args[2], args[3], args[4])
                 matrix_mult( stack[-1], tmp )
                 draw_polygons(tmp, screen, zbuffer, view, ambient, light, symbols, reflect)
                 tmp = []

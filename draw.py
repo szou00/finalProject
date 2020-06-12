@@ -379,25 +379,46 @@ def add_pyramid(polygons, x, y, z, b, h):
     add_polygon(polygons, x, y, z,
                           x-w, y-h, z+w,
                           x+w, y-h, z+w)
+    add_polygon(polygons, x+w, y-h, z+w,
+                          x-w, y-h, z+w,
+                          x, y, z)
     #left
     add_polygon(polygons, x, y, z,
                           x-w, y-h, z-w,
                           x-w, y-h, z+w)
+    add_polygon(polygons, x-w, y-h, z+w,
+                          x-w, y-h, z-w,
+                          x, y, z)
     #right
     add_polygon(polygons, x, y, z,
                           x+w, y-h, z-w,
                           x+w, y-h, z+w)
+    add_polygon(polygons, x+w, y-h, z+w,
+                          x+w, y-h, z-w,
+                          x, y, z)
     #back
     add_polygon(polygons, x, y, z,
                           x-w, y-h, z-w,
                           x+w, y-h, z-w)
+    add_polygon(polygons, x+w, y-h, z-w,
+                          x-w, y-h, z-w,
+                          x, y, z)
     # #bottom
     add_polygon(polygons, x-w, y-h, z-w,
                           x+w, y-h, z-w,
                           x+w, y-h, z+w)
     add_polygon(polygons, x+w, y-h, z+w,
+                          x+w, y-h, z-w,
+                          x-w, y-h, z-w)
+
+    add_polygon(polygons, x+w, y-h, z+w,
                           x-w, y-h, z+w,
                           x-w, y-h, z-w)
+    add_polygon(polygons, x-w, y-h, z-w,
+                          x-w, y-h, z+w,
+                          x+w, y-h, z+w)
+
+
 
 
 
